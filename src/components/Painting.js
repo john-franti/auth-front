@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Painting = props => {
   return (
@@ -10,15 +11,27 @@ const Painting = props => {
         <div className="header">{`"${props.painting.title}" by ${props.painting
           .artist.name}`}</div>
         <div className="description">
-          <a onClick={props.handleVote}>
+          <a
+            onClick={() => {
+              props.handleVote(props.painting.id);
+            }}
+          >
             <i className="large caret up icon" />
             {props.painting.votes} votes
           </a>
         </div>
         <div className="extra">
-          <div onClick={props.handleToggle} className="ui button basic red">
-            <i className="trash icon" />
-            Delete
+          <div className="ui big buttons">
+            <Link
+              to={`/paintings/${props.painting.slug}`}
+              className="ui basic blue button"
+            >
+              <i className="add circle icon" />
+              More Info
+            </Link>
+            <div onClick={props.handleToggle} className="ui button basic red">
+              <i className="trash icon" />
+            </div>
           </div>
         </div>
       </div>

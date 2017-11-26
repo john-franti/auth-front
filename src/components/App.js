@@ -1,6 +1,9 @@
 import React from 'react';
 import Navbar from './Navbar';
 import About from './About';
+import PaintingsContainer from './PaintingsContainer';
+
+import { Route } from 'react-router-dom';
 
 class App extends React.Component {
   render() {
@@ -14,7 +17,8 @@ class App extends React.Component {
         />
         <div className="ui container grid">
           <div id="content" className="sixteen wide column">
-            <About />
+            <Route exact path="/" component={About} />
+            <Route path="/paintings" component={PaintingsContainer} />
           </div>
         </div>
       </div>

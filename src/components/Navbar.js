@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Navbar = props => {
   return (
     <div className={`ui top fixed inverted ${props.color} menu`}>
-      <Link className="item">
+      <Link to="/" className="item">
         <h2 className="ui header">
           <i className={`${props.icon} icon`} />
           <div className="content">{props.title}</div>
@@ -12,9 +12,13 @@ const Navbar = props => {
         </h2>
       </Link>
       <div className="right menu">
-        <Link className="item">index</Link>
-        <Link className="item">new</Link>
-        <Link className="item">
+        <Link to="/paintings" className="item">
+          index
+        </Link>
+        <Link to="/paintings/new" className="item">
+          new
+        </Link>
+        <Link to="/sign_in" className="item">
           <div className="ui primary button">Sign In</div>
         </Link>
       </div>
