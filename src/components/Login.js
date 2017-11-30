@@ -1,9 +1,11 @@
 import React from 'react';
+import { api } from '../services/api';
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
+      error: false,
       fields: {
         username: '',
         password: ''
@@ -18,14 +20,15 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('submitted');
+    this.props.handleLogin(this.state.fields);
   };
 
   render() {
+    console.log(this.props);
     const { fields } = this.state;
     return (
       <div>
-        {this.state.error ? <h1>Try Again</h1> : null}
+        {this.state.error ? <h1>Try again...</h1> : null}
         <div className="ui form">
           <form onSubmit={this.handleSubmit}>
             <div className="ui field">

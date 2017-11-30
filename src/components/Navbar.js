@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = props => {
+  const currentUser = props.currentUser;
+  const loggedIn = !!props.currentUser.id;
   return (
     <div className={`ui top fixed inverted ${props.color} menu`}>
       <Link to="/" className="item">
@@ -18,9 +20,18 @@ const Navbar = props => {
         <Link to="/paintings/new" className="item">
           new
         </Link>
-        <Link to="/sign_in" className="item">
-          <div className="ui primary button">Sign In</div>
-        </Link>
+        {loggedIn ? (
+          <a className="item">Welcome {currentUser.username}</a>
+        ) : null}
+        {loggedIn ? (
+          <a className="item">
+            <div className="ui primary button">Sign Out</div>
+          </a>
+        ) : (
+          <Link to="/login" className="item">
+            <div className="ui primary button">Sign In</div>
+          </Link>
+        )}
       </div>
     </div>
   );
