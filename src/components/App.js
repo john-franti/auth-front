@@ -5,7 +5,7 @@ import Login from './Login';
 import PaintingsContainer from './PaintingsContainer';
 import { api } from '../services/api';
 
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 class App extends React.Component {
   constructor() {
@@ -32,7 +32,8 @@ class App extends React.Component {
 
   login = data => {
     const updatedState = { ...this.state.auth, user: data };
-    localStorage.setItem('token', data.id);
+    console.log(data);
+    localStorage.setItem('token', data.jwt);
     this.setState({ auth: updatedState });
   };
 

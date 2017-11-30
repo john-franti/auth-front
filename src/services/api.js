@@ -1,12 +1,16 @@
 const API_ROOT = `http://localhost:3001/api/v1`;
+const token = localStorage.getItem('token');
 
 const headers = {
   'Content-Type': 'application/json',
-  Accepts: 'application/json'
+  Accepts: 'application/json',
+  Authorization: token
 };
 
 const getPaintings = () => {
-  return fetch(`${API_ROOT}/paintings/`).then(res => res.json());
+  return fetch(`${API_ROOT}/paintings/`, { headers: headers }).then(res =>
+    res.json()
+  );
 };
 
 const login = data => {
@@ -18,9 +22,8 @@ const login = data => {
 };
 
 const getCurrentUser = () => {
-  const token = localStorage.getItem('token');
   return fetch(`${API_ROOT}/current_user`, {
-    headers: { Authorization: token }
+    headers: headers
   }).then(res => res.json());
 };
 

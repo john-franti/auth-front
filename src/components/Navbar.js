@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 const Navbar = props => {
   const currentUser = props.currentUser;
@@ -25,7 +25,13 @@ const Navbar = props => {
         ) : null}
         {loggedIn ? (
           <a className="item">
-            <div onClick={props.handleLogout} className="ui primary button">
+            <div
+              onClick={() => {
+                props.handleLogout();
+                props.history.push('/login');
+              }}
+              className="ui primary button"
+            >
               Sign Out
             </div>
           </a>
@@ -39,4 +45,4 @@ const Navbar = props => {
   );
 };
 
-export default Navbar;
+export default withRouter(Navbar);
