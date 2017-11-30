@@ -1,11 +1,9 @@
 import React from 'react';
-import { api } from '../services/api';
 
 class Login extends React.Component {
   constructor() {
     super();
     this.state = {
-      error: false,
       fields: {
         username: '',
         password: ''
@@ -20,18 +18,11 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    api.auth.login(this.state.fields).then(data => {
-      if (!data.error) {
-        this.props.handleLogin(data);
-        this.props.history.push('/paintings');
-      } else {
-        this.setState({ error: true });
-      }
-    });
+    console.log('submitted');
   };
 
   render() {
-    console.log('Login', this.props);
+    const { fields } = this.state;
     return (
       <div>
         {this.state.error ? <h1>Try Again</h1> : null}
@@ -42,7 +33,7 @@ class Login extends React.Component {
               <input
                 name="username"
                 placeholder="username"
-                value={this.state.fields.username}
+                value={fields.username}
                 onChange={this.handleChange}
               />
             </div>
@@ -52,7 +43,7 @@ class Login extends React.Component {
                 name="password"
                 type="password"
                 placeholder="password"
-                value={this.state.fields.password}
+                value={fields.password}
                 onChange={this.handleChange}
               />
             </div>

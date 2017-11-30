@@ -2,7 +2,7 @@ import React from 'react';
 import PaintingsNew from './PaintingsNew';
 import PaintingsList from './PaintingsList';
 import PaintingShow from './PaintingShow';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { api } from '../services/api';
 
 class PaintingsContainer extends React.Component {
