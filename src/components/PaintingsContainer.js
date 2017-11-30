@@ -2,7 +2,8 @@ import React from 'react';
 import PaintingsNew from './PaintingsNew';
 import PaintingsList from './PaintingsList';
 import PaintingShow from './PaintingShow';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { api } from '../services/api';
 
 class PaintingsContainer extends React.Component {
   constructor() {
@@ -17,13 +18,15 @@ class PaintingsContainer extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3001/api/v1/paintings/')
-      .then(res => res.json())
-      .then(data => {
+    if (!localStorage.getItem('token')) {
+      this.props.history.push('/login');
+    } else {
+      api.paintings.getPaintings().then(data => {
         this.setState({
           paintings: data.slice(0, 20).sort((a, b) => b.votes - a.votes)
         });
       });
+    }
   }
 
   handleDelete(id) {
