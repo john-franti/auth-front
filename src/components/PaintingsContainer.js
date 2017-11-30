@@ -21,10 +21,16 @@ class PaintingsContainer extends React.Component {
     if (!localStorage.getItem('token')) {
       this.props.history.push('/login');
     } else {
-      api.paintings.getPaintings().then(data => {
-        this.setState({
-          paintings: data.slice(0, 20).sort((a, b) => b.votes - a.votes)
-        });
+      api.auth.getCurrentUser().then(user => {
+        if (user.error) {
+          this.props.history.push('/login');
+        } else {
+          api.paintings.getPaintings().then(data => {
+            this.setState({
+              paintings: data.slice(0, 20).sort((a, b) => b.votes - a.votes)
+            });
+          });
+        }
       });
     }
   }

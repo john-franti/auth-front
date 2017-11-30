@@ -13,20 +13,32 @@ class App extends React.Component {
 
     this.state = {
       auth: {
-        isLoggedIn: false,
         user: {}
       }
     };
   }
 
-  login = data => {
-    api.auth.login(data).then(res => {
-      if (!res.error) {
-        const updatedState = { ...this.state.auth, user: res };
-        localStorage.setItem('token', res.id);
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      console.log('there is a token');
+      // make a request to the backend and find our user
+      api.auth.getCurrentUser().then(user => {
+        const updatedState = { ...this.state.auth, user: user };
         this.setState({ auth: updatedState });
-      }
-    });
+      });
+    }
+  }
+
+  login = data => {
+    const updatedState = { ...this.state.auth, user: data };
+    localStorage.setItem('token', data.id);
+    this.setState({ auth: updatedState });
+  };
+
+  logout = () => {
+    localStorage.removeItem('token');
+    this.setState({ auth: { user: {} } });
   };
 
   render() {
@@ -38,13 +50,15 @@ class App extends React.Component {
           description="our app"
           icon="paint brush"
           currentUser={this.state.auth.user}
+          handleLogout={this.logout}
         />
         <div className="ui container grid">
           <div id="content" className="sixteen wide column">
             <Route exact path="/" component={About} />
             <Route
+              exact
               path="/login"
-              render={() => <Login handleLogin={this.login} />}
+              render={props => <Login {...props} handleLogin={this.login} />}
             />
             <Route path="/paintings" component={PaintingsContainer} />
           </div>

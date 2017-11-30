@@ -3,15 +3,17 @@ import { api } from '../services/api';
 
 export default class extends React.Component {
   componentDidMount() {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (token) {
-      // make a request to the backend and find our user
-      api.auth.getCurrentUser(token).then(res => console.log(res));
-    } else {
+    if (!localStorage.getItem('token')) {
       this.props.history.push('/login');
+    } else {
+      api.auth.getCurrentUser().then(user => {
+        if (user.error) {
+          this.props.history.push('/login');
+        }
+      });
     }
   }
+
   render() {
     return (
       <div>

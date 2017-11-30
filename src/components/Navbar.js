@@ -25,7 +25,9 @@ const Navbar = props => {
         ) : null}
         {loggedIn ? (
           <a className="item">
-            <div className="ui primary button">Sign Out</div>
+            <div onClick={props.handleLogout} className="ui primary button">
+              Sign Out
+            </div>
           </a>
         ) : (
           <Link to="/login" className="item">

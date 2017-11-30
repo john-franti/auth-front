@@ -20,11 +20,18 @@ class Login extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.handleLogin(this.state.fields);
+    api.auth.login(this.state.fields).then(res => {
+      if (!res.error) {
+        const updatedState = { ...this.state.auth, user: res };
+        this.props.handleLogin(res);
+        this.props.history.push('/');
+      } else {
+        this.setState({ error: true });
+      }
+    });
   };
 
   render() {
-    console.log(this.props);
     const { fields } = this.state;
     return (
       <div>
