@@ -32,7 +32,6 @@ class App extends React.Component {
 
   login = data => {
     const updatedState = { ...this.state.auth, user: data };
-    console.log(data);
     localStorage.setItem('token', data.jwt);
     this.setState({ auth: updatedState });
   };
