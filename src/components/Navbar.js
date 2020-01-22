@@ -9,7 +9,7 @@ const Navbar = props => {
       <Link to="/" className="item">
         <h2 className="ui header">
           <i className={`${props.icon} icon`} />
-          <div className="content">{props.title}</div>
+          <div className="content">Paint Finder</div>
           <div className="sub header">{props.description}</div>
         </h2>
       </Link>

@@ -24,6 +24,7 @@ class App extends React.Component {
       console.log('there is a token');
       // make a request to the backend and find our user
       api.auth.getCurrentUser().then(user => {
+        console.log(user)
         const updatedState = { ...this.state.auth, user: user };
         this.setState({ auth: updatedState });
       });
@@ -33,7 +34,7 @@ class App extends React.Component {
   login = data => {
     const updatedState = { ...this.state.auth, user: data };
     localStorage.setItem('token', data.jwt);
-    this.setState({ auth: updatedState });
+    this.setState({ auth: updatedState });  
   };
 
   logout = () => {
@@ -58,7 +59,7 @@ class App extends React.Component {
             <Route
               exact
               path="/login"
-              render={props => <Login {...props} handleLogin={this.login} />}
+              render={props => <Login {...props} onLogin={this.login} />}
             />
             <Route path="/paintings" component={PaintingsContainer} />
           </div>
