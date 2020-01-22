@@ -25,7 +25,7 @@ const login = data => {
 };
 
 const getCurrentUser = () => {
-  console.log("getting current user", headers);
+  // console.log("getting current user", headers);
   return fetch(`${API_ROOT}/current_user`, {
     headers: headers()
   }).then(res => {

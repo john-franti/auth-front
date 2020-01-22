@@ -1,14 +1,14 @@
-import React from 'react';
-import { api } from '../services/api';
+import React from "react";
+import { api } from "../services/api";
 
 export default class extends React.Component {
   componentDidMount() {
-    if (!localStorage.getItem('token')) {
-      this.props.history.push('/login');
+    if (!localStorage.getItem("token")) {
+      this.props.history.push("/login");
     } else {
       api.auth.getCurrentUser().then(user => {
         if (user.error) {
-          this.props.history.push('/login');
+          this.props.history.push("/login");
         }
       });
     }

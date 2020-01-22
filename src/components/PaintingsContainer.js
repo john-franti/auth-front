@@ -22,18 +22,14 @@ class PaintingsContainer extends React.Component {
       this.props.history.push("/login");
     } else {
       api.auth.getCurrentUser().then(user => {
-        console.log(user);
+        // console.log(user);
         if (user.error) {
           this.props.history.push("/login");
         } else {
           api.paintings.getPaintings().then(data => {
-            this.setState(
-              {
-                paintings: data.slice(0, 20).sort((a, b) => b.votes - a.votes)
-              },
-              () =>
-                console.log("Paintings in state: ", this.state.paintings.length)
-            );
+            this.setState({
+              paintings: data.slice(0, 20).sort((a, b) => b.votes - a.votes)
+            });
           });
         }
       });

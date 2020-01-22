@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React from "react";
+import { Link, withRouter } from "react-router-dom";
 
 const Navbar = props => {
   const currentUser = props.currentUser;
@@ -28,7 +28,7 @@ const Navbar = props => {
             <div
               onClick={() => {
                 props.handleLogout();
-                props.history.push('/login');
+                props.history.push("/login");
               }}
               className="ui primary button"
             >

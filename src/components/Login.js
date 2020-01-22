@@ -22,7 +22,7 @@ class Login extends React.Component {
     e.preventDefault();
     api.auth.login(this.state.fields).then(res => {
       if (!res.error) {
-        const updatedState = { ...this.state.auth, user: res };
+        // const updatedState = { ...this.state.auth, user: res };
         this.props.onLogin(res);
         this.props.history.push('/');
       } else {

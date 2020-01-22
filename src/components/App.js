@@ -1,11 +1,11 @@
-import React from 'react';
-import Navbar from './Navbar';
-import About from './About';
-import Login from './Login';
-import PaintingsContainer from './PaintingsContainer';
-import { api } from '../services/api';
+import React from "react";
+import Navbar from "./Navbar";
+import About from "./About";
+import Login from "./Login";
+import PaintingsContainer from "./PaintingsContainer";
+import { api } from "../services/api";
 
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from "react-router-dom";
 
 class App extends React.Component {
   constructor() {
@@ -19,12 +19,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
-      console.log('there is a token');
+      // console.log('there is a token');
       // make a request to the backend and find our user
       api.auth.getCurrentUser().then(user => {
-        console.log(user)
+        // console.log(user)
         const updatedState = { ...this.state.auth, user: user };
         this.setState({ auth: updatedState });
       });
@@ -33,12 +33,12 @@ class App extends React.Component {
 
   login = data => {
     const updatedState = { ...this.state.auth, user: data };
-    localStorage.setItem('token', data.jwt);
-    this.setState({ auth: updatedState });  
+    localStorage.setItem("token", data.jwt);
+    this.setState({ auth: updatedState });
   };
 
   logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     this.setState({ auth: { user: {} } });
   };
 
